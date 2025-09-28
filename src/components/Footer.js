@@ -36,34 +36,34 @@ const Footer = () => {
             <div className="footer-section">
               <div className="footer-title">Company</div>
               <ul className="footer-links">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Press</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li><a href="/press">Press</a></li>
               </ul>
             </div>
             <div className="footer-section">
               <div className="footer-title">Support</div>
               <ul className="footer-links">
-                <li><a href="#">Help center</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Cancellations</a></li>
+                <li><a href="/help">Help center</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cancellations">Cancellations</a></li>
               </ul>
             </div>
             <div className="footer-section">
               <div className="footer-title">Legal</div>
               <ul className="footer-links">
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Cookie policy</a></li>
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="/terms">Terms</a></li>
+                <li><a href="/cookies">Cookie policy</a></li>
               </ul>
             </div>
           </div>
           <div className="footer-bottom">
             <div>© {currentYear} Voyago, Inc. All rights reserved.</div>
             <div className="footer-bottom-links">
-              <a href="#">Sitemap</a>
-              <a href="#">Accessibility</a>
-              <a href="#">Status</a>
+              <a href="/sitemap">Sitemap</a>
+              <a href="/accessibility">Accessibility</a>
+              <a href="/status">Status</a>
             </div>
           </div>
         </div>

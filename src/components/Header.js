@@ -3,7 +3,6 @@ import './Header.css';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -28,7 +27,7 @@ const Header = () => {
       <header className="main-header">
         <div className="header-container">
           <div className="header-left">
-            <a href="#" className="logo">
+            <a href="/" className="logo">
               <div className="logo-icon">VG</div>
               <span className="logo-text">Voyago</span>
             </a>

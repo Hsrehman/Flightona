@@ -20,7 +20,6 @@ const Hero = () => {
   const [showFromMenu, setShowFromMenu] = useState(false);
   const [showDestinationMenu, setShowDestinationMenu] = useState(false);
   const [showGuestsMenu, setShowGuestsMenu] = useState(false);
-  const [showDatePanel, setShowDatePanel] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [fromSearchMode, setFromSearchMode] = useState(false);

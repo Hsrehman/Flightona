@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Packages.css';
 
 const Packages = () => {
-  const [cartCount, setCartCount] = useState(0);
 
   const packages = [
     {
@@ -68,7 +67,6 @@ const Packages = () => {
   ];
 
   const handleAddToCart = (packageTitle) => {
-    setCartCount(prev => prev + 1);
     // Show toast notification
     console.log(`Added "${packageTitle}" to cart`);
   };
