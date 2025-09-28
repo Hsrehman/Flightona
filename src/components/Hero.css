@@ -1,0 +1,459 @@
+.hero-section {
+  position: relative;
+  z-index: 30;
+  overflow: visible;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -10;
+}
+
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.gradient-blob-1 {
+  top: -6rem;
+  left: -6rem;
+  width: 32rem;
+  height: 32rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.1) 50%, rgba(16, 185, 129, 0.2) 100%);
+}
+
+.gradient-blob-2 {
+  top: 8rem;
+  right: -5rem;
+  width: 28rem;
+  height: 28rem;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(244, 63, 94, 0.1) 50%, rgba(251, 191, 36, 0.2) 100%);
+}
+
+.hero-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 1.5rem;
+}
+
+/* Search Card */
+.search-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.25rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.search-card:hover {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Removed search card's own gradients - it now uses the page background */
+
+.search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.search-header h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #171717;
+}
+
+.filters-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #404040;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filters-toggle:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: #d4d4d4;
+}
+
+/* Search Fields */
+.search-fields {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-field label {
+  display: block;
+  font-size: 0.8125rem;
+  color: #525252;
+  margin-bottom: 0.25rem;
+}
+
+.field-container {
+  position: relative;
+}
+
+.field-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+  min-height: 3rem;
+  height: auto;
+}
+
+.field-input span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.field-input:hover {
+  border-color: #d4d4d4;
+}
+
+.field-input input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #171717;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  font-family: inherit;
+  font-weight: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  vertical-align: middle;
+  min-height: 1.5rem;
+}
+
+.field-input input::placeholder {
+  color: #a3a3a3;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+  position: absolute;
+  z-index: 20;
+  margin-top: 0.5rem;
+  width: 100%;
+  background: white;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.dropdown-menu ul {
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.dropdown-menu li button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  color: #171717;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li button:hover {
+  background: #f5f5f5;
+}
+
+/* Guests Menu */
+.guests-menu {
+  position: absolute;
+  z-index: 20;
+  margin-top: 0.5rem;
+  width: 100%;
+  background: white;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.guests-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.guests-item > div:first-child {
+  flex: 1;
+}
+
+.guests-item > div:first-child > div:first-child {
+  font-size: 0.875rem;
+  color: #171717;
+}
+
+.guests-item > div:first-child > div:last-child {
+  font-size: 0.75rem;
+  color: #737373;
+}
+
+.guests-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.guests-controls button {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  background: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.guests-controls button:hover {
+  background: #f5f5f5;
+}
+
+.guests-controls span {
+  width: 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+}
+
+/* Checkbox Field */
+.checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkbox-field:hover {
+  border-color: #d4d4d4;
+}
+
+.checkbox-field.checked {
+  border-color: #d4d4d4;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(212, 212, 212, 0.8);
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox svg {
+  color: #171717;
+}
+
+.checkbox-field span {
+  font-size: 0.875rem;
+  color: #404040;
+}
+
+/* Filters Panel */
+.filters-panel {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(229, 229, 229, 0.7);
+  padding-top: 1rem;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-field label {
+  display: block;
+  font-size: 0.8125rem;
+  color: #525252;
+  margin-bottom: 0.25rem;
+}
+
+.currency-symbol {
+  color: #737373;
+  font-size: 0.875rem;
+}
+
+/* Action Buttons */
+.search-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #171717;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background: #262626;
+}
+
+.reset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(229, 229, 229, 0.7);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.875rem;
+  color: #171717;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-button:hover {
+  border-color: #d4d4d4;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Hero Tagline */
+.hero-tagline {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: #404040;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .search-fields {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    padding: 1rem;
+  }
+  
+  .search-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .search-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-card {
+    padding: 1rem;
+  }
+  
+  .search-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
