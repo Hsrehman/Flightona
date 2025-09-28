@@ -1,105 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  // Campaign messages with different urgency levels
-  const campaignMessages = [
-    {
-      text: "Winter Escapes from £299",
-      cta: "See Offers",
-      urgency: "low",
-      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days from now
-    },
-    {
-      text: "Flash Sale: Ends in 2 Days",
-      cta: "Shop Now",
-      urgency: "high",
-      endDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000) // 2 days from now
-    },
-    {
-      text: "Early Bird Special - Save 25%",
-      cta: "Book Today",
-      urgency: "medium",
-      endDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000) // 5 days from now
-    }
-  ];
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Rotate messages every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMessageIndex((prevIndex) => 
-        (prevIndex + 1) % campaignMessages.length
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Countdown timer
-  useEffect(() => {
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const endTime = campaignMessages[currentMessageIndex].endDate.getTime();
-      const difference = endTime - now;
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        setTimeLeft({ days, hours, minutes, seconds });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-
-    return () => clearInterval(timer);
-  }, [currentMessageIndex]);
-
-  const handlePromoClick = () => {
-    // Handle CTA click - could navigate to offers page or open modal
-    console.log('Promo CTA clicked:', campaignMessages[currentMessageIndex].cta);
-  };
-
   return (
     <>
-      {/* Enhanced Promo Bar */}
-      <div className={`top-notification promo-bar-${campaignMessages[currentMessageIndex].urgency}`}>
+      {/* Top Notification */}
+      <div className="top-notification">
         <div className="notification-content">
           <svg className="notification-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
             <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
             <line x1="12" y1="22.08" x2="12" y2="12"/>
           </svg>
-          <span className="promo-message">{campaignMessages[currentMessageIndex].text}</span>
-          
-          {/* Countdown Timer */}
-          <div className="countdown-timer">
-            {timeLeft.days > 0 && <span className="time-unit">{timeLeft.days}d</span>}
-            <span className="time-unit">{timeLeft.hours}h</span>
-            <span className="time-unit">{timeLeft.minutes}m</span>
-            <span className="time-unit">{timeLeft.seconds}s</span>
-          </div>
-          
-          <button 
-            className="notification-link promo-cta" 
-            onClick={handlePromoClick}
-          >
-            {campaignMessages[currentMessageIndex].cta}
-          </button>
+          <span>Save more with early bookings — up to 20% off on select packages.</span>
+          <button className="notification-link">Explore deals</button>
         </div>
       </div>
 
