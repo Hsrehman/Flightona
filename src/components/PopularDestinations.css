@@ -1,0 +1,208 @@
+.popular-destinations-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.popular-destinations-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.popular-destinations-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.popular-destinations-header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #171717;
+  margin-bottom: 0.75rem;
+}
+
+.popular-destinations-header p {
+  font-size: 1.125rem;
+  color: #525252;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Destinations Grid */
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.destination-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.destination-image-container {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.destination-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.destination-card:hover .destination-image {
+  transform: scale(1.05);
+}
+
+.destination-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  transition: background 0.3s ease;
+}
+
+.destination-card:hover .destination-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.destination-info {
+  color: white;
+  width: 100%;
+}
+
+.destination-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.destination-country {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.destination-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.destination-price .price-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+.destination-price .price-amount {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .popular-destinations-section {
+    padding: 2rem 0;
+  }
+  
+  .popular-destinations-header h2 {
+    font-size: 1.875rem;
+  }
+  
+  .popular-destinations-header p {
+    font-size: 1rem;
+  }
+  
+  .destinations-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .destination-overlay {
+    padding: 1rem;
+  }
+  
+  .destination-name {
+    font-size: 1.25rem;
+  }
+  
+  .destination-country {
+    font-size: 0.875rem;
+  }
+  
+  .destination-price .price-amount {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .popular-destinations-container {
+    padding: 0 1rem;
+  }
+  
+  .popular-destinations-header {
+    margin-bottom: 2rem;
+  }
+  
+  .popular-destinations-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .destination-overlay {
+    padding: 0.75rem;
+  }
+  
+  .destination-name {
+    font-size: 1.125rem;
+  }
+  
+  .destination-country {
+    font-size: 0.8125rem;
+  }
+  
+  .destination-price .price-amount {
+    font-size: 1rem;
+  }
+}

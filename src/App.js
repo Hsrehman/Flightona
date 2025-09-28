@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Divider from './components/Divider';
+import PopularDestinations from './components/PopularDestinations';
 import Packages from './components/Packages';
 import WhyUs from './components/WhyUs';
 import Testimonials from './components/Testimonials';
@@ -16,6 +17,7 @@ function App() {
       <main>
         <Hero />
         <Divider />
+        <PopularDestinations />
         <Packages />
         <WhyUs />
         <Testimonials />

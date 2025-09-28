@@ -34,6 +34,8 @@ const Hero = () => {
   const calendarRef = useRef(null);
   const fromFieldRef = useRef(null);
   const destinationFieldRef = useRef(null);
+  const nightsMenuRef = useRef(null);
+  const guestsMenuRef = useRef(null);
 
   const destinations = [
     'Anywhere',
@@ -86,16 +88,22 @@ const Hero = () => {
         setDestinationSearchMode(false);
         setDestinationSearchValue('');
       }
+      if (nightsMenuRef.current && !nightsMenuRef.current.contains(event.target)) {
+        setShowNightsMenu(false);
+      }
+      if (guestsMenuRef.current && !guestsMenuRef.current.contains(event.target)) {
+        setShowGuestsMenu(false);
+      }
     };
 
-    if (showCalendar || showFromMenu || showDestinationMenu) {
+    if (showCalendar || showFromMenu || showDestinationMenu || showNightsMenu || showGuestsMenu) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showCalendar, showFromMenu, showDestinationMenu]);
+  }, [showCalendar, showFromMenu, showDestinationMenu, showNightsMenu, showGuestsMenu]);
 
   const handleFromSelect = (destination) => {
     setSearchData({ ...searchData, from: destination });
@@ -379,7 +387,7 @@ const Hero = () => {
             {/* Nights */}
             <div className="search-field">
               <label>Nights</label>
-              <div className="field-container">
+              <div className="field-container" ref={nightsMenuRef}>
                 <div 
                   className="field-input"
                   onClick={() => setShowNightsMenu(!showNightsMenu)}
@@ -417,7 +425,7 @@ const Hero = () => {
             {/* Guests */}
             <div className="search-field">
               <label>Guests</label>
-              <div className="field-container">
+              <div className="field-container" ref={guestsMenuRef}>
                 <div 
                   className="field-input"
                   onClick={() => setShowGuestsMenu(!showGuestsMenu)}
