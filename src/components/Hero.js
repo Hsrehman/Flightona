@@ -135,7 +135,10 @@ const Hero = () => {
 
   const handleSearch = () => {
     console.log('Searching with:', searchData);
-    // Handle search logic here
+    try {
+      localStorage.setItem('flightona_search', JSON.stringify(searchData));
+    } catch (e) {}
+    window.location.hash = '#search';
   };
 
   const handleReset = () => {

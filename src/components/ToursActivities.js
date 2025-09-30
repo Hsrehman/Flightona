@@ -215,7 +215,7 @@ const ToursActivities = () => {
                       <span className="unit">per person</span>
                     </div>
                     <div className="ta-actions">
-                      <button className="ta-btn ghost">View details</button>
+                      <button className="ta-btn ghost" onClick={() => { window.location.hash = '#package/1'; }}>View details</button>
                       <button className="ta-btn primary">Book now</button>
                     </div>
                   </div>
@@ -252,7 +252,7 @@ const ToursActivities = () => {
                       <span className="unit">per person</span>
                     </div>
                     <div className="ta-actions">
-                      <button className="ta-btn ghost">View</button>
+                      <button className="ta-btn ghost" onClick={() => { window.location.hash = '#package/2'; }}>View</button>
                       <button className="ta-btn">Book</button>
                     </div>
                   </div>

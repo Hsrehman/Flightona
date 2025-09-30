@@ -6,51 +6,51 @@ const PopularDestinations = () => {
   const trendingDestinations = [
     {
       id: 1,
-      name: "Maldives",
-      country: "Maldives",
-      image: "/images/maldives.jpg",
-      startingPrice: 1899,
-      packageId: 1
+      name: "Istanbul",
+      country: "Türkiye",
+      image: "/images/bosphorus-cruise.jpg",
+      startingPrice: 799,
+      packageId: 101
     },
     {
       id: 2,
-      name: "Tokyo",
-      country: "Japan",
-      image: "/images/tokyo.jpg",
-      startingPrice: 1450,
-      packageId: 2
+      name: "Cappadocia",
+      country: "Türkiye",
+      image: "/images/dubai-desert.jpg",
+      startingPrice: 650,
+      packageId: 102
     },
     {
       id: 3,
-      name: "Swiss Alps",
-      country: "Switzerland",
-      image: "/images/swiss-alps.jpg",
-      startingPrice: 2350,
-      packageId: 3
+      name: "Antalya",
+      country: "Türkiye",
+      image: "/images/phuket-catamaran.jpg",
+      startingPrice: 720,
+      packageId: 103
     },
     {
       id: 4,
-      name: "Santorini",
-      country: "Greece",
+      name: "Izmir",
+      country: "Türkiye",
       image: "/images/santorini.jpg",
-      startingPrice: 1280,
-      packageId: 4
+      startingPrice: 690,
+      packageId: 104
     },
     {
       id: 5,
-      name: "New York",
-      country: "USA",
-      image: "/images/new-york.jpg",
-      startingPrice: 980,
-      packageId: 5
+      name: "Ankara",
+      country: "Türkiye",
+      image: "/images/swiss-alps.jpg",
+      startingPrice: 610,
+      packageId: 105
     },
     {
       id: 6,
-      name: "Bali",
-      country: "Indonesia",
-      image: "/images/bali.jpg",
-      startingPrice: 1390,
-      packageId: 6
+      name: "Fethiye",
+      country: "Türkiye",
+      image: "/images/phuket-catamaran.jpg",
+      startingPrice: 740,
+      packageId: 106
     }
   ];
 
@@ -67,8 +67,8 @@ const PopularDestinations = () => {
     <section className="popular-destinations-section">
       <div className="popular-destinations-container">
         <div className="popular-destinations-header">
-          <h2>Where's Popular?</h2>
-          <p>Discover trending destinations that travelers are loving right now</p>
+          <h2>Popular in Türkiye</h2>
+          <p>Top cities and regions across Türkiye right now</p>
         </div>
 
         <div className="destinations-grid">

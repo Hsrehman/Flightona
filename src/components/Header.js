@@ -19,7 +19,7 @@ const Header = () => {
             <line x1="12" y1="22.08" x2="12" y2="12"/>
           </svg>
           <span>Save more with early bookings — up to 20% off on select packages.</span>
-          <button className="notification-link">Explore deals</button>
+          <button className="notification-link" onClick={() => { window.location.hash = '#search'; }}>Explore deals</button>
         </div>
       </div>
 
