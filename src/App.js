@@ -6,7 +6,6 @@ import PopularDestinations from './components/PopularDestinations';
 import Packages from './components/Packages';
 import ToursActivities from './components/ToursActivities';
 import WhyUs from './components/WhyUs';
-import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import './App.css';
@@ -22,7 +21,6 @@ function App() {
         <Packages />
         <ToursActivities />
         <WhyUs />
-        <Testimonials />
         <FAQ />
       </main>
       <Footer />
