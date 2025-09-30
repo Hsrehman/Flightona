@@ -47,6 +47,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent accidental horizontal scrolling */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* Remove all focus borders */
 button:focus,
 input:focus,

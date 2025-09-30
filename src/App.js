@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Divider from './components/Divider';
 import PopularDestinations from './components/PopularDestinations';
 import Packages from './components/Packages';
+import ToursActivities from './components/ToursActivities';
 import WhyUs from './components/WhyUs';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
@@ -19,6 +20,7 @@ function App() {
         <Divider />
         <PopularDestinations />
         <Packages />
+        <ToursActivities />
         <WhyUs />
         <Testimonials />
         <FAQ />

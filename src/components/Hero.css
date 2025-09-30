@@ -386,6 +386,11 @@
   transition: background-color 0.3s ease;
 }
 
+.search-submit .search-button {
+  width: 100%;
+  height: calc(3rem + 0.5rem);
+}
+
 .search-button:hover {
   background: #262626;
 }

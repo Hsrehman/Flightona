@@ -4,7 +4,6 @@ import Calendar from './Calendar';
 
 const Hero = () => {
   const [searchData, setSearchData] = useState({
-    from: 'Select origin',
     destination: 'Anywhere',
     checkin: '',
     checkout: '',
@@ -17,21 +16,17 @@ const Hero = () => {
     sort: 'Recommended'
   });
 
-  const [showFromMenu, setShowFromMenu] = useState(false);
   const [showDestinationMenu, setShowDestinationMenu] = useState(false);
   const [showGuestsMenu, setShowGuestsMenu] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
-  const [fromSearchMode, setFromSearchMode] = useState(false);
   const [destinationSearchMode, setDestinationSearchMode] = useState(false);
-  const [fromSearchValue, setFromSearchValue] = useState('');
   const [destinationSearchValue, setDestinationSearchValue] = useState('');
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [calendarPosition, setCalendarPosition] = useState(null);
   const [showNightsMenu, setShowNightsMenu] = useState(false);
   const calendarRef = useRef(null);
-  const fromFieldRef = useRef(null);
   const destinationFieldRef = useRef(null);
   const nightsMenuRef = useRef(null);
   const guestsMenuRef = useRef(null);
@@ -77,11 +72,6 @@ const Hero = () => {
       if (calendarRef.current && !calendarRef.current.contains(event.target)) {
         setShowCalendar(false);
       }
-      if (fromFieldRef.current && !fromFieldRef.current.contains(event.target)) {
-        setShowFromMenu(false);
-        setFromSearchMode(false);
-        setFromSearchValue('');
-      }
       if (destinationFieldRef.current && !destinationFieldRef.current.contains(event.target)) {
         setShowDestinationMenu(false);
         setDestinationSearchMode(false);
@@ -95,21 +85,14 @@ const Hero = () => {
       }
     };
 
-    if (showCalendar || showFromMenu || showDestinationMenu || showNightsMenu || showGuestsMenu) {
+    if (showCalendar || showDestinationMenu || showNightsMenu || showGuestsMenu) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showCalendar, showFromMenu, showDestinationMenu, showNightsMenu, showGuestsMenu]);
-
-  const handleFromSelect = (destination) => {
-    setSearchData({ ...searchData, from: destination });
-    setShowFromMenu(false);
-    setFromSearchMode(false);
-    setFromSearchValue('');
-  };
+  }, [showCalendar, showDestinationMenu, showNightsMenu, showGuestsMenu]);
 
   const handleDestinationSelect = (destination) => {
     setSearchData({ ...searchData, destination });
@@ -157,7 +140,6 @@ const Hero = () => {
 
   const handleReset = () => {
     setSearchData({
-      from: 'Select origin',
       destination: 'Anywhere',
       checkin: '',
       checkout: '',
@@ -169,14 +151,11 @@ const Hero = () => {
       budget: '',
       sort: 'Recommended'
     });
-    setShowFromMenu(false);
     setShowDestinationMenu(false);
     setShowGuestsMenu(false);
     setShowFilters(false);
     setShowSortMenu(false);
-    setFromSearchMode(false);
     setDestinationSearchMode(false);
-    setFromSearchValue('');
     setDestinationSearchValue('');
     setShowCalendar(false);
     setSelectedDate(null);
@@ -187,7 +166,6 @@ const Hero = () => {
   // Check if there are any non-default values
   const hasNonDefaultValues = () => {
     return (
-      searchData.from !== 'Select origin' ||
       searchData.destination !== 'Anywhere' ||
       searchData.checkin !== '' ||
       searchData.checkout !== '' ||
@@ -227,65 +205,6 @@ const Hero = () => {
 
           {/* Search Fields */}
           <div className="search-fields">
-            {/* From */}
-            <div className="search-field">
-              <label>From</label>
-              <div className="field-container" ref={fromFieldRef}>
-                <div 
-                  className="field-input"
-                  onClick={() => {
-                    setShowFromMenu(!showFromMenu);
-                    if (!showFromMenu) {
-                      setFromSearchMode(true);
-                    }
-                  }}
-                >
-                  {!fromSearchMode ? (
-                    <>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                      </svg>
-                      <span>{searchData.from}</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="M21 21l-4.35-4.35"/>
-                      </svg>
-                      <input 
-                        type="text" 
-                        placeholder="Search origin"
-                        value={fromSearchValue}
-                        onChange={(e) => setFromSearchValue(e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none placeholder-neutral-400 flex-1"
-                        autoFocus
-                      />
-                    </>
-                  )}
-                </div>
-                {showFromMenu && (
-                  <div className="dropdown-menu">
-                    <ul>
-                      {destinations
-                        .filter(dest => dest.toLowerCase().includes(fromSearchValue.toLowerCase()))
-                        .map((dest) => (
-                        <li key={dest}>
-                          <button onClick={() => handleFromSelect(dest)}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                              <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            {dest}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
 
             {/* Destination */}
             <div className="search-field">
@@ -480,6 +399,18 @@ const Hero = () => {
               </div>
             </div>
 
+          {/* Search submit (moved after Guests) */}
+          <div className="search-field search-submit">
+            <label>&nbsp;</label>
+            <button className="search-button" onClick={handleSearch}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+              </svg>
+              Search packages
+            </button>
+          </div>
+
           </div>
 
           {/* Filters Panel */}
@@ -526,21 +457,14 @@ const Hero = () => {
             </div>
           )}
 
-          {/* Action Buttons */}
-          <div className="search-actions">
-            <button className="search-button" onClick={handleSearch}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="M21 21l-4.35-4.35"/>
-              </svg>
-              Search packages
-            </button>
-            {hasNonDefaultValues() && (
+          {/* Reset Button (optional) */}
+          {hasNonDefaultValues() && (
+            <div className="search-actions">
               <button className="reset-button" onClick={handleReset}>
                 Reset
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Tagline */}

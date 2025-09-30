@@ -1,4 +1,5 @@
 import React from 'react';
+import SafeImage from './SafeImage';
 import './PopularDestinations.css';
 
 const PopularDestinations = () => {
@@ -7,7 +8,7 @@ const PopularDestinations = () => {
       id: 1,
       name: "Maldives",
       country: "Maldives",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop",
+      image: "/images/maldives.jpg",
       startingPrice: 1899,
       packageId: 1
     },
@@ -15,7 +16,7 @@ const PopularDestinations = () => {
       id: 2,
       name: "Tokyo",
       country: "Japan",
-      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop",
+      image: "/images/tokyo.jpg",
       startingPrice: 1450,
       packageId: 2
     },
@@ -23,7 +24,7 @@ const PopularDestinations = () => {
       id: 3,
       name: "Swiss Alps",
       country: "Switzerland",
-      image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop",
+      image: "/images/swiss-alps.jpg",
       startingPrice: 2350,
       packageId: 3
     },
@@ -31,7 +32,7 @@ const PopularDestinations = () => {
       id: 4,
       name: "Santorini",
       country: "Greece",
-      image: "https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=800&q=80",
+      image: "/images/santorini.jpg",
       startingPrice: 1280,
       packageId: 4
     },
@@ -39,7 +40,7 @@ const PopularDestinations = () => {
       id: 5,
       name: "New York",
       country: "USA",
-      image: "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=800&auto=format&fit=crop",
+      image: "/images/new-york.jpg",
       startingPrice: 980,
       packageId: 5
     },
@@ -47,7 +48,7 @@ const PopularDestinations = () => {
       id: 6,
       name: "Bali",
       country: "Indonesia",
-      image: "https://images.unsplash.com/photo-1642615835477-d303d7dc9ee9?w=800&q=80",
+      image: "/images/bali.jpg",
       startingPrice: 1390,
       packageId: 6
     }
@@ -79,7 +80,7 @@ const PopularDestinations = () => {
               onClick={() => handleDestinationClick(destination.packageId)}
             >
               <div className="destination-image-container">
-                <img 
+                <SafeImage 
                   src={destination.image} 
                   alt={destination.name} 
                   className="destination-image"

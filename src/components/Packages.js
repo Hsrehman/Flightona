@@ -1,4 +1,5 @@
 import React from 'react';
+import SafeImage from './SafeImage';
 import './Packages.css';
 
 const Packages = () => {
@@ -8,7 +9,7 @@ const Packages = () => {
       id: 1,
       title: "Maldives Escape",
       location: "South Ari Atoll",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1760&auto=format&fit=crop",
+      image: "/images/maldives.jpg",
       nights: "5 nights",
       rating: 4.9,
       price: 1899,
@@ -18,7 +19,7 @@ const Packages = () => {
       id: 2,
       title: "Tokyo Discovery",
       location: "Shinjuku • Shibuya",
-      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1760&auto=format&fit=crop",
+      image: "/images/tokyo.jpg",
       nights: "7 nights",
       rating: 4.7,
       price: 1450,
@@ -28,7 +29,7 @@ const Packages = () => {
       id: 3,
       title: "Swiss Alps Retreat",
       location: "Zermatt • Interlaken",
-      image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1760&auto=format&fit=crop",
+      image: "/images/swiss-alps.jpg",
       nights: "6 nights",
       rating: 4.8,
       price: 2350,
@@ -38,7 +39,7 @@ const Packages = () => {
       id: 4,
       title: "Santorini Sunsets",
       location: "Oia • Fira",
-      image: "https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&q=80",
+      image: "/images/santorini.jpg",
       nights: "4 nights",
       rating: 4.6,
       price: 1280,
@@ -48,7 +49,7 @@ const Packages = () => {
       id: 5,
       title: "NYC City Break",
       location: "Manhattan • Brooklyn",
-      image: "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=1760&auto=format&fit=crop",
+      image: "/images/new-york.jpg",
       nights: "3 nights",
       rating: 4.5,
       price: 980,
@@ -58,7 +59,7 @@ const Packages = () => {
       id: 6,
       title: "Bali & Ubud Journey",
       location: "Seminyak • Ubud",
-      image: "https://images.unsplash.com/photo-1642615835477-d303d7dc9ee9?w=1080&q=80",
+      image: "/images/bali.jpg",
       nights: "8 nights",
       rating: 4.8,
       price: 1390,
@@ -91,7 +92,7 @@ const Packages = () => {
           {packages.map((pkg, index) => (
             <div key={pkg.id} className="package-card" style={{ animationDelay: `${index * 80}ms` }}>
               <div className="package-image-container">
-                <img src={pkg.image} alt={pkg.title} className="package-image" />
+                <SafeImage src={pkg.image} alt={pkg.title} className="package-image" />
                 <button className="favorite-button">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
