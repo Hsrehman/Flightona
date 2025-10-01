@@ -10,6 +10,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import SearchResults from './components/SearchResults';
 import PackageDetails from './components/PackageDetails';
+import SearchBar from './components/SearchBar';
 import './App.css';
 
 function App() {
@@ -27,6 +28,13 @@ function App() {
     <div className="App">
       <Header />
       <main>
+        {/* Global SearchBar (compact on search/detail, hero contains its own layout) */}
+        {isSearch || isPackage ? (
+          <div className="hero-container" style={{ maxWidth: '80rem', margin: '0 auto', padding: '1rem' }}>
+            <SearchBar variant="compact" />
+          </div>
+        ) : null}
+
         {isPackage ? (
           <PackageDetails />
         ) : isSearch ? (

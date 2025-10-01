@@ -78,6 +78,8 @@
   gap: 1rem;
 }
 
+/* removed inline-search in favor of global SearchBar */
+
 .filters-panel {
   position: relative;
 }
@@ -420,11 +422,13 @@
   .results-layout {
     grid-template-columns: 260px 1fr;
   }
+  .inline-search { grid-template-columns: 1fr 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
   .mobile-filters-button { display: inline-flex; }
   .results-layout { grid-template-columns: 1fr; }
+  .inline-search { grid-template-columns: 1fr; }
   .filters-panel {
     position: fixed;
     inset: 0 0 0 0;

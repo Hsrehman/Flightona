@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import SafeImage from './SafeImage';
-import { packagesData as PACKAGES } from './mockData';
+import DATA from '../data/mockData.json';
 import './SearchResults.css';
 
 const ALL_FEATURES = [
@@ -21,7 +21,15 @@ const ALL_BOARD_TYPES = [
   'All-inclusive'
 ];
 
-const MOCK_RESULTS = PACKAGES;
+const BOARD_LABELS = {
+  RO: 'Room only',
+  BB: 'Breakfast included',
+  HB: 'Half board',
+  FB: 'Full board',
+  AI: 'All-inclusive'
+};
+
+const PACKAGES = (DATA && DATA.packages) ? DATA.packages : [];
 
 const SearchResults = () => {
   const [destination, setDestination] = useState('');
@@ -34,6 +42,18 @@ const SearchResults = () => {
   const [priceMax, setPriceMax] = useState('');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const handleInlineSearch = () => {
+    try {
+      const prev = JSON.parse(localStorage.getItem('flightona_search') || '{}');
+      const next = { ...prev };
+      if (destination) next.destination = destination;
+      if (departureDate) next.checkin = departureDate;
+      if (nights) next.duration = nights;
+      if (guestsRooms) next.guests = guestsRooms;
+      localStorage.setItem('flightona_search', JSON.stringify(next));
+    } catch (e) {}
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,17 +79,50 @@ const SearchResults = () => {
     setSelectedFeatures([]);
   };
 
+  const cities = useMemo(() => {
+    return Array.from(new Set(PACKAGES.map(p => p.city))).filter(Boolean).sort();
+  }, []);
+
   const filteredResults = useMemo(() => {
-    return MOCK_RESULTS.filter(item => {
-      if (destination && !(`${item.location} ${item.name}`.toLowerCase().includes(destination.toLowerCase()))) return false;
-      if (boardType !== 'Any' && item.boardType !== boardType) return false;
-      if (minStars && item.starRating < minStars) return false;
-      if (priceMin && item.price < Number(priceMin)) return false;
-      if (priceMax && item.price > Number(priceMax)) return false;
-      if (selectedFeatures.length > 0 && !selectedFeatures.every(f => item.features.includes(f))) return false;
+    return PACKAGES.filter(item => {
+      if (destination && item.city !== destination) return false;
+      if (boardType !== 'Any' && BOARD_LABELS[item.boardType] !== boardType) return false;
+      const star = item.accommodation && item.accommodation.starRating ? item.accommodation.starRating : 0;
+      if (minStars && star < minStars) return false;
+      const price = item.pricing && item.pricing.fromPricePerPerson ? item.pricing.fromPricePerPerson : 0;
+      if (priceMin && price < Number(priceMin)) return false;
+      if (priceMax && price > Number(priceMax)) return false;
+      if (nights && Number(item.nights) !== Number(nights)) return false;
+      if (selectedFeatures.length > 0) {
+        const feats = (item.tags || item.badges || []);
+        if (!selectedFeatures.every(f => feats.includes(f))) return false;
+      }
       return true;
     });
-  }, [destination, boardType, minStars, priceMin, priceMax, selectedFeatures]);
+  }, [destination, boardType, minStars, priceMin, priceMax, nights, selectedFeatures]);
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('flightona_search') || '{}');
+      // Map destination like "Istanbul, Türkiye" -> "Istanbul"
+      if (saved.destination && saved.destination !== 'Anywhere') {
+        const candidate = String(saved.destination).split(',')[0].trim();
+        if (candidate && cities.includes(candidate)) {
+          setDestination(candidate);
+        }
+      }
+      if (saved.duration) {
+        setNights(String(saved.duration));
+      }
+      if (saved.checkin) {
+        // Attempt to parse/normalize date; if invalid keep as is
+        setDepartureDate(saved.checkin);
+      }
+      if (saved.guests) {
+        setGuestsRooms(saved.guests);
+      }
+    } catch (e) {}
+  }, [cities]);
 
   return (
     <section className="results-page">
@@ -108,7 +161,12 @@ const SearchResults = () => {
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                     <circle cx="12" cy="10" r="3"/>
                   </svg>
-                  <input value={destination} onChange={(e) => setDestination(e.target.value)} placeholder="Where to?"/>
+                  <select value={destination} onChange={(e) => setDestination(e.target.value)}>
+                    <option value="">Anywhere</option>
+                    {cities.map(city => (
+                      <option key={city} value={city}>{city}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -237,9 +295,9 @@ const SearchResults = () => {
               {filteredResults.map((item, index) => (
                 <div className="result-card" key={item.id} style={{ animationDelay: `${index * 80}ms` }}>
                   <div className="card-media">
-                    <SafeImage src={item.image} alt={item.name} className="card-image" />
+                    <SafeImage src={item.heroImage?.url} alt={item.name} className="card-image" />
                     <div className="media-badges">
-                      {item.boardType && <span className="badge">{item.boardType}</span>}
+                      {item.boardType && <span className="badge">{BOARD_LABELS[item.boardType] || item.boardType}</span>}
                     </div>
                   </div>
                   <div className="card-content">
@@ -251,28 +309,27 @@ const SearchResults = () => {
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                             <circle cx="12" cy="10" r="3"/>
                           </svg>
-                          <span>{item.location}{item.distance ? ` • ${item.distance}` : ''}</span>
+                          <span>{item.city}{item.locationLine ? ` • ${item.locationLine}` : ''}</span>
                         </div>
                       </div>
                       <div className="rating">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                           <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
                         </svg>
-                        <span>{item.starRating}</span>
-                        <span className="reviews">{item.reviewScore} ({item.reviewsCount.toLocaleString()})</span>
+                        <span>{item.accommodation?.starRating ?? '-'}</span>
                       </div>
                     </div>
 
                     <div className="tags">
-                      {(item.features || []).slice(0, 3).map(t => (
+                      {(item.tags || item.badges || []).slice(0, 3).map(t => (
                         <span className="tag" key={t}>{t}</span>
                       ))}
                     </div>
 
                     <div className="card-footer">
                       <div className="price">
-                        <span className="amount">${item.price.toLocaleString()}</span>
-                        <span className="unit">{item.priceUnit}</span>
+                        <span className="amount">${(item.pricing?.fromPricePerPerson || 0).toLocaleString()}</span>
+                        <span className="unit">/person</span>
                       </div>
                       <div className="cta-group">
                         <button className="secondary-cta" onClick={() => { window.location.hash = `#package/${item.id}`; }}>View details</button>

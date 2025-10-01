@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import SafeImage from './SafeImage';
-import { packagesData } from './mockData';
+import DATA from '../data/mockData.json';
 import './PackageDetails.css';
 
 function usePackageFromHash() {
@@ -9,15 +9,19 @@ function usePackageFromHash() {
     // expected formats: #package/ID or #package?pid=ID
     if (hash.startsWith('#package/')) {
       const idStr = hash.replace('#package/', '').trim();
-      const id = Number(idStr);
-      return packagesData.find(p => p.id === id) || null;
+      const id = idStr; // ids are strings in generated data
+      const all = (DATA && DATA.packages) ? DATA.packages : [];
+      return all.find(p => String(p.id) === String(id)) || null;
     }
     if (hash.startsWith('#package')) {
       const qIndex = hash.indexOf('?');
       if (qIndex !== -1) {
         const params = new URLSearchParams(hash.slice(qIndex + 1));
-        const pid = Number(params.get('pid'));
-        if (pid) return packagesData.find(p => p.id === pid) || null;
+        const pid = params.get('pid');
+        if (pid) {
+          const all = (DATA && DATA.packages) ? DATA.packages : [];
+          return all.find(p => String(p.id) === String(pid)) || null;
+        }
       }
     }
     return null;
